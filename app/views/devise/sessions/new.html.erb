@@ -21,6 +21,9 @@
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>
+<div>
+  <%= link_to "Sign in with Github", user_github_omniauth_authorize_path %>
+
 <% end %>
 
 <%= render "devise/shared/links" %>
