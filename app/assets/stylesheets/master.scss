@@ -1,1 +1,18 @@
 @import "bootstrap";
+
+table {
+	border: 1px solid #000;
+}
+            
+td {
+	width: 100px;
+  height: 100px;
+  background: #ff0;
+}
+
+.td01{
+  background: #fff;
+}
+.td02{
+  background: #000;
+}
