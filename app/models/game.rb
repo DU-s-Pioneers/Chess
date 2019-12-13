@@ -1,3 +1,3 @@
 class Game < ApplicationRecord
-  scope :available, -> {where(available: true)}
+    scope :available, -> {where(available: true)}
 end
