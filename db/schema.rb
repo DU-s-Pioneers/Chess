@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_024113) do
+ActiveRecord::Schema.define(version: 2019_12_12_222347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 2019_12_05_024113) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "white_player_id"
+    t.integer "black_player_id"
+  end
+
+  create_table "pieces", force: :cascade do |t|
+    t.integer "x_position"
+    t.integer "y_position"
+    t.integer "player_id"
+    t.integer "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "type"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,6 +41,9 @@ ActiveRecord::Schema.define(version: 2019_12_05_024113) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "uid"
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
