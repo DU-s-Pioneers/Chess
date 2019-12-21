@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def index
-    @game = Game.order("Random()").first
+    @games = Game.all
   end
 
   def new
