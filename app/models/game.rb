@@ -23,12 +23,7 @@ end
 	def populate_board!
 		create_white_pieces
 		create_black_pieces
-		set_player_ids
 		pieces.reload
-	end
-
-	def set_player_ids
-
 	end
 
 	def set_pieces_user(color, user_id)

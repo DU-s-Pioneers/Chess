@@ -8,7 +8,8 @@ class GamesController < ApplicationController
   end
 
   def create
-    Game.create(game_params)
+    game = Game.create(game_params)
+    game.update_attributes(white_player_id: current_user.id) 
     redirect_to root_path
   end
 
