@@ -1,6 +1,12 @@
 class Game < ApplicationRecord
   has_many :pieces
+	after_create :populate_board!
 
+	has_many :users
+	has_many :pieces
+	
+	scope :available, -> {where(black_player_id: nil)}
+  
   def is_occupied?(x, y)
     pieces.each do |piece|
       if piece.x_coord == x && piece.y_coord == y
@@ -11,13 +17,6 @@ class Game < ApplicationRecord
     return false
   end
 end
-
-  after_create :populate_board!
-
-	has_many :users
-	has_many :pieces
-	
-	scope :available, -> {where(black_player_id: nil)}
 
 
 	def populate_board!
@@ -68,4 +67,4 @@ end
 		create_piece(Knight, 6, 7, black_player_id)
 		create_piece(Rook,   7, 7, black_player_id)
 	end
-end
+
