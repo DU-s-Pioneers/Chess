@@ -4,7 +4,8 @@
     <% @games.available.each do |game| %>
       <li>
         <div class="game">
-          <h1><%= game.name %></h1>
+          <h1><%= game.name %>-
+            <%= link_to("Join Game", "/join/#{game.id}", method: :put) %></h1>
         </div>
       </li>
     <% end %>
