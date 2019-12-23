@@ -63,4 +63,3 @@ class Piece < ApplicationRecord
     return false
   end
 end
-
