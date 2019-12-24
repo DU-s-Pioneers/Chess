@@ -13,6 +13,10 @@ class GamesController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    @game = Game.find(params[:id])
+  end
+
   def join
     game = Game.find(params[:id])
     return unless game.black_player_id.nil?
@@ -25,4 +29,5 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:name)
   end
+
 end
