@@ -1,2 +1,14 @@
-<h1>Hola Amigos!!</h1>
-<h2><%= @game.inspect %></h2>
+<section id='games_index'>
+  <h1>Join a Game</h1>
+  <ul>
+    <% @games.available.each do |game| %>
+      <li>
+        <div class="game">
+          <h1><%= game.name %>-
+            <%= link_to("Join Game", "/join/#{game.id}", method: :put) %></h1>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
