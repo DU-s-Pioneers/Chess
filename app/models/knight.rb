@@ -1,5 +1,5 @@
 class Knight < Piece
-  def valid_move?(x, y)
+  def valid_move?(to_x, to_y)
     if  
       x == (self.to_x + 1) && y == (self.to_y + 2) ||
       x == (self.to_x + 1) && y == (self.to_y - 2) ||
