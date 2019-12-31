@@ -6,4 +6,5 @@ class Pawn < Piece
 		elsif y_dest > y_coord
 			(y_dest - y_coord).abs ==1
 		end
+	end
 end
