@@ -1,9 +1,9 @@
 class Rook < Piece
-	def valid_move?(x_dest, y_dest) 
-		if x_position == x_dest
-			y_dest =! y_position
-		elsif y_coord == y_dest
-			x_dest =! x_position
+	def valid_move?(to_x, to_y) 
+		if x_position == to_x
+			to_y =! y_position
+		elsif y_position == to_y
+			to_x =! x_position
 		end
 	end
 end
