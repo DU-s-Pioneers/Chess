@@ -60,6 +60,10 @@ class Piece < ApplicationRecord
     #   fail 'not a stright line'
     # end
 
+  def move_to!(new_x, new_y)
+    
+  end
+
     return false
   end
 end
