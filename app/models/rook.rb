@@ -7,3 +7,4 @@ class Rook < Piece
 		end
 	end
 end
+
