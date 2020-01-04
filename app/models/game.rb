@@ -9,7 +9,7 @@ class Game < ApplicationRecord
   
   def is_occupied?(x, y)
     pieces.each do |piece|
-      if piece.x_coord == x && piece.y_coord == y
+      if piece.x_position == x && piece.y_position == y
         return true 
       end
     end

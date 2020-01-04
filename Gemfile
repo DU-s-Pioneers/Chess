@@ -81,3 +81,4 @@ end
 
 gem 'omniauth-github'
 gem 'factory_bot_rails'
+

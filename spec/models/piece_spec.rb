@@ -6,8 +6,8 @@ RSpec.describe Piece, type: :model do
       :game,
       pieces: [FactoryBot.create(
         :piece,
-        x_coord: 0,
-        y_coord: 0
+        x_position: 0,
+        y_position: 0
       )]
     )
   end
@@ -26,13 +26,14 @@ RSpec.describe Piece, type: :model do
         FactoryBot.create(
           :piece,
           game_id: game.id,
-          x_coord: 0,
-          y_coord: 1
+          x_position: 0,
+          y_position: 1
         )
       end
       it "should return true if there is vertical obstruction" do
-        piece = Piece.first
-        expect(piece.is_obstructed?(0,3)).to be true
+        piece = Piece.create!(x_position: 0, y_position: 3, game_id: game.id)
+        piece = Piece.create!(x_position: 0, y_position: 5, game_id: game.id)
+        expect(piece.is_obstructed?(0,1)).to be true
       end
     end
 

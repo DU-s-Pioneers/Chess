@@ -6,8 +6,8 @@ RSpec.describe Game, type: :model do
       :game,
       pieces: [FactoryBot.create(
         :piece,
-        x_coord: 0,
-        y_coord: 0
+        x_position: 0,
+        y_position: 0
       )]
     )
   end
@@ -24,7 +24,7 @@ RSpec.describe Game, type: :model do
       end
     end
   end
-end
+
 
   describe "create pieces" do
     it "passes" do 
