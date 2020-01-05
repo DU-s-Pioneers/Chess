@@ -62,4 +62,20 @@ class Piece < ApplicationRecord
 
     return false
   end
+
+  def move_to!(new_x, new_y)
+    @game = game
+    if is_occupied?(new_x, new_y)
+      @piece_at_destination = @game.pieces.find_by(x_coord: new_x, y_coord: new_y)
+      if color == @piece_at_destination.color
+        fail 'same team'
+      else
+        @piece_at_destination.update_attributes(x_coord: nil, y_coord: nil, status: 'captured')
+        @status = @piece_at_destination.status
+        @captured = true
+      end
+    else @captured = false
+    end
+  end
+
 end
