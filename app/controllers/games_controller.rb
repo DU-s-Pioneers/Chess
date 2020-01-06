@@ -24,6 +24,10 @@ class GamesController < ApplicationController
     redirect_to game
   end
 
+  def destroy
+    redirect_to root_path
+  end
+
   private
 
   def game_params
