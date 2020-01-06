@@ -1,33 +1,10 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <h1 align="Center">Have Fun</h1>
-        <link rel="stylesheet" href="master.scss">
-        <script type="text/javascript">
-            var str="<table cellpadding='0' cellspacing='0'>";
-            var off=false; 
-            for(i=1;i<=8;i++){
-                str+="<tr>";
-                for(j=1;j<=8;j++){
-                    if(off){
-                        off=!off;
-                        str+='<td class="td01"></td>';
-                    }
-                    else{
-                        off=!off;
-                        str+='<td class="td02"></td>';
-                    }
-                }
-                off=!off;
-                str+="</tr>";
-            }
-            str+="</table>";
-            document.write(str);
-        </script>
-        
-    <%= link_to("Quit game", "/games/:id", method: :delete) %></h1>
-
-    </head>
-    <body>
-    </body>
-</html>
+<h1>Chess Game</h1>
+<br/>
+<div class='chess_board mx-auto mt-1'>
+    <% 8.times do |row| %>
+        <% 8.times do |column| %>
+            <div class='<%= (row + column).even? ? 'white' : 'black' %>'></div>
+        <% end %>
+    <% end %>
+</div>
+<%= link_to("Quit game", "/games/:id", method: :delete) %></h1>
