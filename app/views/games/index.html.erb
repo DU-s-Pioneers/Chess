@@ -1,4 +1,5 @@
 <section id='games_index'>
+    <%= link_to("Create new game", games_path(game: { name: 'test' }), method: :post) %></h1>
   <h1>Join a Game</h1>
   <ul>
     <% @games.available.each do |game| %>
