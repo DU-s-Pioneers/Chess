@@ -12,47 +12,47 @@ class Piece < ApplicationRecord
   end
 
   def is_obstructed?(x_dest, y_dest)
-    if x_coord == x_dest && y_coord < y_dest
-      (y_coord + 1).upto(y_dest - 1) do |y|
-        return true if game.is_occupied?(x_coord, y)
+    if x_position == x_dest && y_position < y_dest
+      (y_position + 1).upto(y_dest - 1) do |y|
+        return true if game.is_occupied?(x_position, y)
       end
     end
 
-    if x_coord == x_dest && y_coord > y_dest
-      (y_coord - 1).downto(y_dest + 1) do |y|
-        return true if game.is_occupied?(x_coord, y)
+    if x_position == x_dest && y_position > y_dest
+      (y_position - 1).downto(y_dest + 1) do |y|
+        return true if game.is_occupied?(x_position, y)
       end
     end
 
-    if y_coord == y_dest && x_coord < x_dest
-      (x_coord + 1).upto(x_dest - 1) do |x|
-        return true if game.is_occupied?(x_coord, y)
+    if y_position == y_dest && x_position < x_dest
+      (x_position + 1).upto(x_dest - 1) do |x|
+        return true if game.is_occupied?(x_position, y)
       end
     end
 
-    if y_coord == y_dest && x_coord > x_dest
-      (x_coord - 1).downto(x_dest + 1) do |x|
-        return true if game.is_occupied?(x_coord, y)
+    if y_position == y_dest && x_position > x_dest
+      (x_position - 1).downto(x_dest + 1) do |x|
+        return true if game.is_occupied?(x_position, y)
       end
     end
 
-    if @slope == 1.0 && x_coord < x_dest
-      (x_coord + 1).upto(x_dest - 1) do |x|
-        delta_y = x - x_coord
-        y = y_dest > y_coord ? y_coord + delta_y : y_coord - delta_y
+    if @slope == 1.0 && x_position < x_dest
+      (x_position + 1).upto(x_dest - 1) do |x|
+        delta_y = x - x_position
+        y = y_dest > y_position ? y_position + delta_y : y_position - delta_y
         return true if game.is_occupied?(x, y)
       end
     end
 
-    if @slope == 1.0 && x_coord > x_dest
-      (x_coord - 1).downto(x_dest + 1) do |x|
-        delta_y = x_coord - x
-        y = y_dest > y_coord ? y_coord + delta_y : y_coord - delta_y
+    if @slope == 1.0 && x_position > x_dest
+      (x_position - 1).downto(x_dest + 1) do |x|
+        delta_y = x_position - x
+        y = y_dest > y_position ? y_position + delta_y : y_position - delta_y
         return true if game.is_occupied?(x, y)
       end
     end
 
-    # if y_coord == y_dest || x_coord == x_dest
+    # if y_position == y_dest || x_position == x_dest
     #   fail 'not a move'
     # end
 
