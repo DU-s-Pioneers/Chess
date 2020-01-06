@@ -81,4 +81,6 @@ end
 gem 'omniauth-github'
 gem 'factory_bot_rails'
 gem 'jquery-ui-rails'
+gem 'font_awesome5_rails'
+
 

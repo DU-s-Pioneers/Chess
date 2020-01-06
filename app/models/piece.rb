@@ -82,4 +82,8 @@ class Piece < ApplicationRecord
     end
   end
 
+  def piece_color
+    color == true ? 'white' : 'black'
+  end
+
 end
