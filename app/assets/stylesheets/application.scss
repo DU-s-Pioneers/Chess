@@ -29,7 +29,7 @@
 }
 
 .black {
-  background-color: black;
+  background-color: #666;
 }
 
 .white {
@@ -37,7 +37,7 @@
 }
 
 .piece {
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 .piece_black {
@@ -46,4 +46,10 @@
 
 .piece_white {
   color: white;
+}
+
+.square {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }

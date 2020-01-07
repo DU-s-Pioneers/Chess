@@ -3,7 +3,7 @@
 <div class='chess_board mx-auto mt-1'>
     <% 8.times do |y_position| %>
         <% 8.times do |x_position| %>
-            <div class='<%= (y_position + x_position).even? ? 'white' : 'black' %>' x_position=<%= x_position %>    y_position=<%= y_position %>>
+            <div class=' square <%= (y_position + x_position).even? ? 'white' : 'black' %>' x_position=<%= x_position %>    y_position=<%= y_position %>>
               <% piece = @game.piece_at(x_position, y_position) %>
 
               
