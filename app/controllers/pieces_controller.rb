@@ -25,8 +25,8 @@ class PiecesController < ApplicationController
 
 		if @piece.player_id != current_user.id 
 			[:error] = "Invalid move. It's NOT your piece. Try another piece"
-		elsif @piece.player_id != @piece.game.turn #the turn method should be called in the game controller
-			[:error] = "It's NOT your turn Please wait."
+		elsif @piece.color != @piece.game.turn.odd? 
+			[:error] = "It's NOT your turn Please wait." #Add a game method to track the turns!
 		elsif @piece.move?(to_x, to_y)
 			render json: { success: true }
 		else
