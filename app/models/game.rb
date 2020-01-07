@@ -16,7 +16,6 @@ class Game < ApplicationRecord
 
     return false
   end
-end
 
 
 	def populate_board!
@@ -24,6 +23,17 @@ end
 		create_black_pieces
 		pieces.reload
 	end
+
+	def check?
+		kings = pieces.where(type: 'King')
+		kings.any?(&:can_be_taken?)
+
+	end
+
+	def pieces_for_color(color)
+		pieces.where(color: color)
+	end
+
 
 	def set_pieces_user(color, user_id)
 
@@ -67,4 +77,5 @@ end
 		create_piece(Knight, 6, 7, black_player_id)
 		create_piece(Rook,   7, 7, black_player_id)
 	end
+end
 
