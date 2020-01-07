@@ -20,8 +20,20 @@ class PiecesController < ApplicationController
 	
 	def update
 		@piece = @game.pieces.find(params[:id])
-		@piece.update_attributes(piece_params)
-		redirect_to game_path(current_game)
+		to_x = params[:x_position].to_i
+		to_y = params[:y_position].to_i
+
+		if @piece.player_id != current_user.id 
+			[:error] = "Invalid move. It's NOT your piece. Try another piece"
+		elsif @piece.player_id != @piece.game.turn #the turn method should be called in the game controller
+			[:error] = "It's NOT your turn Please wait."
+		elsif @piece.move?(to_x, to_y)
+			render json: { success: true }
+		else
+			[:error] = "Move is invalid. Try again."
+
+		# @piece.update_attributes(piece_params)
+		# redirect_to game_path(current_game)
 	end
 
 private
