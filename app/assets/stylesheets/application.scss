@@ -16,6 +16,7 @@
  */
 
 @import "bootstrap";
+@import 'font_awesome5_webfont';
 
 
 .chess_board {
@@ -33,4 +34,16 @@
 
 .white {
   background-color: white;
+}
+
+.piece {
+  font-size: 4rem;
+}
+
+.piece_black {
+  color: black;
+}
+
+.piece_white {
+  color: white;
 }

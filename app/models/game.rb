@@ -7,17 +7,20 @@ class Game < ApplicationRecord
 	
 	scope :available, -> {where(black_player_id: nil)}
   
-  def is_occupied?(x, y)
+	def is_occupied?(x, y)
+		!piece_at(x, y).nil?
+	end
+
+  def piece_at(x, y)
     pieces.each do |piece|
       if piece.x_position == x && piece.y_position == y
-        return true 
+        return piece 
       end
     end
 
-    return false
+    return nil
   end
 end
-
 
 	def populate_board!
 		create_white_pieces
@@ -67,4 +70,3 @@ end
 		create_piece(Knight, 6, 7, black_player_id)
 		create_piece(Rook,   7, 7, black_player_id)
 	end
-
