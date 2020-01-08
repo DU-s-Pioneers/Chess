@@ -1,6 +1,10 @@
 class Piece < ApplicationRecord
   belongs_to :game
 
+  def can_be_taken?
+    game.pieces_for_color(!color).any? { |piece| piece.valid_move?(x_position, y_position) }
+  end
+
   def check_path(x1, y1, x2, y2)
     if y1 == y2
       return 'horizontal'
