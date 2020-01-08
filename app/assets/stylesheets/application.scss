@@ -12,9 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
  */
 
 @import "bootstrap";
+@import 'font_awesome5_webfont';
 
 
 .chess_board {
@@ -27,9 +29,27 @@
 }
 
 .black {
-  background-color: black;
+  background-color: #666;
 }
 
 .white {
   background-color: white;
+}
+
+.piece {
+  font-size: 2rem;
+}
+
+.piece_black {
+  color: black;
+}
+
+.piece_white {
+  color: #aaa;
+}
+
+.square {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
