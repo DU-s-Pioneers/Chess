@@ -25,15 +25,26 @@ class PiecesController < ApplicationController
 
 		if @piece.player_id != current_user.id 
 			[:error] = "Invalid move. It's NOT your piece. Try another piece"
-		elsif @piece.color != @piece.game.turn.odd? 
-			[:error] = "It's NOT your turn Please wait." #Add a game method to track the turns!
-		elsif @piece.move?(to_x, to_y)
-			render json: { success: true }
+		elsif @piece.color == "black" && @piece.game.turn.even? || @piece.color == "white" && @piece.game.turn.odd? 
+			#even=black && odd=white
+			[:error] = "It's NOT your turn Please wait." 
+		elsif @piece.move?(to_x, to_y) #trakcing turns
+			@piece.update_attributes(piece_params) #if the move is valid, update the attributes
+			game = @piece.game #game has turns, pieces don't
+			if game.turn == 1 #1 == white && 2 == black
+				game.turn = 2 #if it is 1's turn, change to 2
+				game.save #save the turn to database
+			else
+				game.turn = 1
+				game.save
+			end
+
+			redirect_to game_path(current_game)
+			
 		else
 			[:error] = "Move is invalid. Try again."
+		end
 
-		# @piece.update_attributes(piece_params)
-		# redirect_to game_path(current_game)
 	end
 
 private
