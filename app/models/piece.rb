@@ -55,7 +55,7 @@ class Piece < ApplicationRecord
         return true if game.is_occupied?(x, y)
       end
     end
-
+  end
     # if y_position == y_dest || x_position == x_dest
     #   fail 'not a move'
     # end
@@ -91,5 +91,4 @@ class Piece < ApplicationRecord
   def at_position?(to_x, to_y)
     x_position == to_x && y_position == to_y
   end
-
 end

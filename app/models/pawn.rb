@@ -31,9 +31,7 @@ class Pawn < Piece
 	end
 
 	def en_passant_capture?(to_x, to_y)
-		if game.en_passant_pawn? return true
-			else return false
-		end
+		return false unless game.en_passant_pawn
 
 		Pawn.find(game.en_passant_pawn).at_position?(to_x, to_y - direction)
 	end
@@ -41,7 +39,7 @@ class Pawn < Piece
 	def move_to!(to_x, to_y)
 		jump_move = valid_jump_move?(to_x, to_y)
 		Pawn.find(game.en_passant_pawn).capture! if en_passant_capture?(to_x, to_y)
-		super (to_x, to_y)
+		super(to_x, to_y)
 		game.en_passant_pawn = id if jump_move
 	end
 
