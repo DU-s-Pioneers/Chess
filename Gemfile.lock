@@ -188,6 +188,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
+    rails_sortable (1.4.0)
     railties (5.2.4)
       actionpack (= 5.2.4)
       activesupport (= 5.2.4)
@@ -303,6 +304,7 @@ DEPENDENCIES
   puma (~> 3.12)
   rails (~> 5.2.3)
   rails-assets-tether (>= 1.3.3)!
+  rails_sortable
   rspec-rails (~> 3.5)
   rubocop (~> 0.77.0)
   sass-rails (~> 5.0)
