@@ -25,46 +25,48 @@ end
 		pieces.reload
 	end
 
-	def set_pieces_user(color, user_id)
+	#def set_pieces_user(color, user_id)
 
-	end
+	#end
 
-	def create_piece(type, x_position, y_position, player_id = nil)
+	def create_piece(type, x_position, y_position, player_id = nil, is_white) 
+	#added is_white argument to add colors to the pieces
 		type.create(
 			x_position: x_position,
 			y_position: y_position,
 			player_id: player_id,
-			game_id: id
+			game_id: id, 
+			white?: is_white
 			)
 	end
 
 	def create_white_pieces
 		8.times do |i|
-			create_piece(Pawn, i, 1, white_player_id)
+			create_piece(Pawn, i, 1, white_player_id, true)
 		end
 
-		create_piece(Rook,   0, 0, white_player_id)
-		create_piece(Knight, 1, 0, white_player_id)
-		create_piece(Bishop, 2, 0, white_player_id)
-		create_piece(Queen,  3, 0, white_player_id)
-		create_piece(King,   4, 0, white_player_id)
-		create_piece(Bishop, 5, 0, white_player_id)
-		create_piece(Knight, 6, 0, white_player_id)
-		create_piece(Rook,   7, 0, white_player_id)
+		create_piece(Rook,   0, 0, white_player_id, true)
+		create_piece(Knight, 1, 0, white_player_id, true)
+		create_piece(Bishop, 2, 0, white_player_id, true)
+		create_piece(Queen,  3, 0, white_player_id, true)
+		create_piece(King,   4, 0, white_player_id, true)
+		create_piece(Bishop, 5, 0, white_player_id, true)
+		create_piece(Knight, 6, 0, white_player_id, true)
+		create_piece(Rook,   7, 0, white_player_id, true)
 	end
 
 	def create_black_pieces
 		8.times do |i|
-			create_piece(Pawn, i, 6, black_player_id)
+			create_piece(Pawn, i, 6, black_player_id, false)
 		end
 
-		create_piece(Rook,   0, 7, black_player_id)
-		create_piece(Knight, 1, 7, black_player_id)
-		create_piece(Bishop, 2, 7, black_player_id)
-		create_piece(Queen,  3, 7, black_player_id)
-		create_piece(King,   4, 7, black_player_id)
-		create_piece(Bishop, 5, 7, black_player_id)
-		create_piece(Knight, 6, 7, black_player_id)
-		create_piece(Rook,   7, 7, black_player_id)
+		create_piece(Rook,   0, 7, black_player_id, false)
+		create_piece(Knight, 1, 7, black_player_id, false)
+		create_piece(Bishop, 2, 7, black_player_id, false)
+		create_piece(Queen,  3, 7, black_player_id, false)
+		create_piece(King,   4, 7, black_player_id, false)
+		create_piece(Bishop, 5, 7, black_player_id, false)
+		create_piece(Knight, 6, 7, black_player_id, false)
+		create_piece(Rook,   7, 7, black_player_id, false)
 	end
 

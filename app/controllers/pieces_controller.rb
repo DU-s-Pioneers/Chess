@@ -25,7 +25,7 @@ class PiecesController < ApplicationController
 
 		if @piece.player_id != current_user.id 
 			[:error] = "Invalid move. It's NOT your piece. Try another piece"
-		elsif @piece.color == "black" && @piece.game.turn.even? || @piece.color == "white" && @piece.game.turn.odd? 
+		elsif @piece.white? == false && @piece.game.turn.odd? || @piece.white? == true && @piece.game.turn.even? 
 			#even=black && odd=white
 			[:error] = "It's NOT your turn Please wait." 
 		elsif @piece.move?(to_x, to_y) #trakcing turns
