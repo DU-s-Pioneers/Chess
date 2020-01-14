@@ -24,6 +24,7 @@ class PiecesController < ApplicationController
 		to_x = params[:x_position].to_i
 		to_y = params[:y_position].to_i
 
+
 		@piece.update(x_position: to_x, y_position: to_y)
 
 		# if @piece.player_id != current_user.id 
