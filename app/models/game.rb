@@ -7,17 +7,19 @@ class Game < ApplicationRecord
 	
 	scope :available, -> {where(black_player_id: nil)}
   
-  def is_occupied?(x, y)
+	def is_occupied?(x, y)
+		!piece_at(x, y).nil?
+	end
+
+  def piece_at(x, y)
     pieces.each do |piece|
       if piece.x_position == x && piece.y_position == y
-        return true 
+        return piece 
       end
     end
 
-    return false
+    return nil
   end
-end
-
 
 	def populate_board!
 		create_white_pieces
@@ -27,13 +29,27 @@ end
 
 	#def set_pieces_user(color, user_id)
 
-	#end
+	def check?
+		kings = pieces.where(type: 'King')
+		kings.any?(&:can_be_taken?)
+
+	end
+
+	def pieces_for_color(color)
+		pieces.where(color: color)
+	end
+
+
+	def set_pieces_user(color, user_id)
+  end
+
 
 	def create_piece(type, x_position, y_position, player_id = nil, is_white) 
-	#added is_white argument to add colors to the pieces
+
 		type.create(
 			x_position: x_position,
 			y_position: y_position,
+			color: color,
 			player_id: player_id,
 			game_id: id, 
 			white?: is_white
@@ -53,6 +69,7 @@ end
 		create_piece(Bishop, 5, 0, white_player_id, true)
 		create_piece(Knight, 6, 0, white_player_id, true)
 		create_piece(Rook,   7, 0, white_player_id, true)
+
 	end
 
 	def create_black_pieces
@@ -68,5 +85,6 @@ end
 		create_piece(Bishop, 5, 7, black_player_id, false)
 		create_piece(Knight, 6, 7, black_player_id, false)
 		create_piece(Rook,   7, 7, black_player_id, false)
-	end
 
+	end
+end

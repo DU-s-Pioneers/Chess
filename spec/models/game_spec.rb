@@ -40,4 +40,28 @@ RSpec.describe Game, type: :model do
       expect(game.pieces.size).to eq 32 
    end
 	end
+
+  describe "check checks" do
+    it "should detrmine if game is in check" do
+      game.pieces << FactoryBot.create(
+        :piece,
+        x_position: 4,
+        y_position: 4,
+        type: 'King',
+        color: true
+        )
+
+      game.pieces << FactoryBot.create(
+        :piece,
+        x_position: 6,
+        y_position: 4,
+        type: 'Rook',
+        color: false
+        )
+      expect(game.check?).to be true
+
+     
+    end
+  end
+
 end 

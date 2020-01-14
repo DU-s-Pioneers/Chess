@@ -1,10 +1,44 @@
 <h1>Chess Game</h1>
 <br/>
 <div class='chess_board mx-auto mt-1'>
-    <% 8.times do |row| %>
-        <% 8.times do |column| %>
-            <div class='<%= (row + column).even? ? 'white' : 'black' %>'></div>
+    <% 8.times do |y_position| %>
+        <% 8.times do |x_position| %>
+            <div class='square <%= (y_position + x_position).even? ? "white" : "black" %>'  data-x-position=<%= x_position %> 
+              data-y-position=<%= y_position %>
+            >
+              <% piece = @game.piece_at(x_position, y_position) %>
+
+              
+                <% if piece %>
+                <span data-piece-id="<%= piece.id %>" class= 'piece piece_<%= piece.piece_color %>'>
+                <%= fa_icon('chess-' + piece.type.downcase) %>
+
+                </span>
+                <% end %>
+            </div>    
         <% end %>
     <% end %>
 </div>
+
+<script> 
+  $('.piece').draggable()
+  $('.square').droppable({
+    drop: function(event, ui) {  
+      $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
+
+      var pieceId = $(this).children('span').first().data('pieceId');
+      var x_position = $(event.target).data('xPosition')
+      var y_position = $(event.target).data('yPosition')
+
+      var pieceUpdateUrl = '/pieces/' + pieceId + '?x_position=' + x_position + '&y_position=' + y_position
+
+      console.log(pieceUpdateUrl)
+
+      $.ajax({
+        type: 'PUT', 
+        url: pieceUpdateUrl
+      })
+    }
+  })
+</script>
 <%= link_to("Quit game", "/games/:id", method: :delete) %></h1>

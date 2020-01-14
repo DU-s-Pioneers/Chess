@@ -1,6 +1,10 @@
 class Piece < ApplicationRecord
   belongs_to :game
 
+  def can_be_taken?
+    game.pieces_for_color(!color).any? { |piece| piece.valid_move?(x_position, y_position) }
+  end
+
   def check_path(x1, y1, x2, y2)
     if y1 == y2
       return 'horizontal'
@@ -51,7 +55,8 @@ class Piece < ApplicationRecord
         return true if game.is_occupied?(x, y)
       end
     end
-
+    false 
+  end
     # if y_position == y_dest || x_position == x_dest
     #   fail 'not a move'
     # end
@@ -60,26 +65,31 @@ class Piece < ApplicationRecord
     #   fail 'not a stright line'
     # end
 
-  def move_to!(new_x, new_y)
-    
+
+  def move_to!(to_x, to_y)
+    game.piece_at(to_x, to_y)&.capture!
+    update_atributes(x_position: to_x, y_position: to_y, moved: true)
+    game.update_atributes(en_passant_pawn: nil)
+    game.pieces.reload
   end
 
-    return false
+  def capture!
+    update_atributes(x_position: nil, y_position: nil)
+  end  
+
+  def enemy_piece_at?(to_x, to_y)
+    game.piece_at(to_x, to_y)&.piece_color == opposite_piece_color
   end
 
-  def move_to!(new_x, new_y)
-    @game = game
-    if is_occupied?(new_x, new_y)
-      @piece_at_destination = @game.pieces.find_by(x_coord: new_x, y_coord: new_y)
-      if color == @piece_at_destination.color
-        fail 'same team'
-      else
-        @piece_at_destination.update_attributes(x_coord: nil, y_coord: nil, status: 'captured')
-        @status = @piece_at_destination.status
-        @captured = true
-      end
-    else @captured = false
-    end
+  def piece_color
+    color == true ? 'white' : 'black'
   end
 
+  def opposite_piece_color
+    color == true ? 'black' : 'white'
+  end
+
+  def at_position?(to_x, to_y)
+    x_position == to_x && y_position == to_y
+  end
 end

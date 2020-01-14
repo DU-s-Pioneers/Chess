@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_01_12_181844) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_01_12_181844) do
     t.integer "white_player_id"
     t.integer "black_player_id"
     t.integer "turn", default: 1
+    t.integer "en_passant_pawn"
   end
 
   create_table "pieces", force: :cascade do |t|
@@ -33,6 +35,8 @@ ActiveRecord::Schema.define(version: 2020_01_12_181844) do
     t.datetime "updated_at", null: false
     t.string "type"
     t.boolean "white?"
+    t.boolean "moved", default: false
+
   end
 
   create_table "users", force: :cascade do |t|
