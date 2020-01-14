@@ -2,9 +2,7 @@ class Game < ApplicationRecord
   has_many :pieces
 	after_create :populate_board!
 
-	has_many :users
-	has_many :pieces
-	
+	has_many :users	
 	scope :available, -> {where(black_player_id: nil)}
   
 	def is_occupied?(x, y)

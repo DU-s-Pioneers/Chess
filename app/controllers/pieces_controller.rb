@@ -50,6 +50,18 @@ class PiecesController < ApplicationController
 
 	end
 
+	def castle_queen
+    @piece = Piece.find(params[:rookid])
+    @piece.castle_queenside!
+    render :json => {}
+  end
+
+  def castle_king
+    @piece = Piece.find(params[:rookid])
+    @piece.castle_kingside!
+    render :json => {}
+  end
+
 private
 
 	def piece_params
