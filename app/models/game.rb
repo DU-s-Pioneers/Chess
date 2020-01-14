@@ -2,9 +2,7 @@ class Game < ApplicationRecord
   has_many :pieces
 	after_create :populate_board!
 
-	has_many :users
-	has_many :pieces
-	
+	has_many :users	
 	scope :available, -> {where(black_player_id: nil)}
   
 	def is_occupied?(x, y)
@@ -87,4 +85,21 @@ class Game < ApplicationRecord
 		create_piece(Rook,   7, 7, black_player_id, false)
 
 	end
+
+	def on_board?
+    Piece.on_board?(x_position, y_position)
+  end
+
+	def pieces_for(color)
+    pieces.filter { |p| p.color == color && p.on_board? }
+  end
+
+	def turn_color
+    return :white if white_turn?
+    return :black if black_turn?
+  end
+
+	def stalemate?
+    pieces_for(turn_color).all? { |p| p.valid_moves.empty? }
+  end
 end
