@@ -55,6 +55,7 @@ class Piece < ApplicationRecord
         return true if game.is_occupied?(x, y)
       end
     end
+    false 
   end
     # if y_position == y_dest || x_position == x_dest
     #   fail 'not a move'
