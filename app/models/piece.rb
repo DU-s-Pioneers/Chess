@@ -92,4 +92,8 @@ class Piece < ApplicationRecord
   def at_position?(to_x, to_y)
     x_position == to_x && y_position == to_y
   end
+
+  def would_be_in_check?(to_x, to_y)
+    
+  end
 end

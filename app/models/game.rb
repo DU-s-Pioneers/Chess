@@ -27,7 +27,7 @@ class Game < ApplicationRecord
 		pieces.reload
 	end
 
-	def check?
+	def check? 
 		kings = pieces.where(type: 'King')
 		kings.any?(&:can_be_taken?)
 

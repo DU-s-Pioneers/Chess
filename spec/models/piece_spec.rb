@@ -36,8 +36,15 @@ RSpec.describe Piece, type: :model do
         expect(piece.is_obstructed?(0,1)).to be true
       end
     end
-
-
-
   end
+
+  describe "prevent moving yourself into check" do
+    it "should not allow you to move into check" do
+      king = King.create!(x_position: 4, y_position: 1, game_id: game.id, color: true)
+      rook = Rook.create!(x_position: 0, y_position: 0, game_id: game.id, color: false)
+      expect(king.would_be_in_check?(4,0)).to be true
+    end
+  end
+
+
 end
