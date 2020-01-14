@@ -25,12 +25,9 @@ class Game < ApplicationRecord
 		pieces.reload
 	end
 
-	#def set_pieces_user(color, user_id)
-
-	def check?
+	def check? 
 		kings = pieces.where(type: 'King')
 		kings.any?(&:can_be_taken?)
-
 	end
 
 	def pieces_for_color(color)
