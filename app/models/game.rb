@@ -44,7 +44,6 @@ class Game < ApplicationRecord
 		type.create(
 			x_position: x_position,
 			y_position: y_position,
-			color: color,
 			player_id: player_id,
 			game_id: id, 
 			white?: is_white

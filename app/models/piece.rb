@@ -96,11 +96,11 @@ class Piece < ApplicationRecord
   end
 
   def piece_color
-    color == true ? 'white' : 'black'
+    white?? 'white' : 'black'
   end
 
   def opposite_piece_color
-    color == true ? 'black' : 'white'
+    white?? 'black' : 'white'
   end
 
   def at_position?(to_x, to_y)
