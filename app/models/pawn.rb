@@ -1,10 +1,9 @@
 class Pawn < Piece
-	def valid_move?(to_x, to_y) 
+	def my_valid_move?(to_x, to_y) 
 		(valid_step_move?(to_x, to_y) ||
 			valid_jump_move?(to_x, to_y) ||
 			valid_capture_move?(to_x, to_y)) &&
-			!is_obstructed?(x_dest, y_dest) &&
-			piece_color !=game.piece_at(x, y)&.piece_color
+			!is_obstructed?(to_x, to_y)
 	end
 
 	def valid_step_move?(to_x, to_y)
