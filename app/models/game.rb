@@ -79,4 +79,21 @@ class Game < ApplicationRecord
 		create_piece(Knight, 6, 7, false, black_player_id)
 		create_piece(Rook,   7, 7, false, black_player_id)
 	end
+
+	def on_board?
+    Piece.on_board?(x_position, y_position)
+  end
+
+	def pieces_for(color)
+    pieces.filter { |p| p.color == color && p.on_board? }
+  end
+
+	def turn_color
+    return :white if white_turn?
+    return :black if black_turn?
+  end
+
+	def stalemate?
+    pieces_for(turn_color).all? { |p| p.valid_moves.empty? }
+  end
 end
