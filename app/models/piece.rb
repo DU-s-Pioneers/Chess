@@ -5,6 +5,20 @@ class Piece < ApplicationRecord
     game.pieces_for_color(!color).any? { |piece| piece.valid_move?(x_position, y_position) }
   end
 
+  def valid_move?(to_x, to_y)
+    my_valid_move?(to_x, to_y) &&
+      on_board?(to_x, to_y) &&
+      game.piece_at(to_x, to_y)&.color != color
+  end
+
+  def on_board?(x = x_position, y = y_position)
+    x && y &&
+      x >= 0 &&
+      x <=7 &&
+      y >= 0 &&
+      y <= 7
+  end
+
   def check_path(x1, y1, x2, y2)
     if y1 == y2
       return 'horizontal'
@@ -15,49 +29,49 @@ class Piece < ApplicationRecord
     end
   end
 
-  def is_obstructed?(x_dest, y_dest)
-    if x_position == x_dest && y_position < y_dest
-      (y_position + 1).upto(y_dest - 1) do |y|
+  def is_obstructed?(to_x, to_y)
+    if x_position == to_x && y_position < to_y
+      (y_position + 1).upto(to_y - 1) do |y|
         return true if game.is_occupied?(x_position, y)
       end
     end
 
-    if x_position == x_dest && y_position > y_dest
-      (y_position - 1).downto(y_dest + 1) do |y|
+    if x_position == to_x && y_position > to_y
+      (y_position - 1).downto(to_y + 1) do |y|
         return true if game.is_occupied?(x_position, y)
       end
     end
 
-    if y_position == y_dest && x_position < x_dest
-      (x_position + 1).upto(x_dest - 1) do |x|
+    if y_position == to_y && x_position < to_x
+      (x_position + 1).upto(to_x - 1) do |x|
         return true if game.is_occupied?(x_position, y)
       end
     end
 
-    if y_position == y_dest && x_position > x_dest
-      (x_position - 1).downto(x_dest + 1) do |x|
+    if y_position == to_y && x_position > to_x
+      (x_position - 1).downto(to_x + 1) do |x|
         return true if game.is_occupied?(x_position, y)
       end
     end
 
-    if @slope == 1.0 && x_position < x_dest
-      (x_position + 1).upto(x_dest - 1) do |x|
+    if @slope == 1.0 && x_position < to_x
+      (x_position + 1).upto(to_x - 1) do |x|
         delta_y = x - x_position
-        y = y_dest > y_position ? y_position + delta_y : y_position - delta_y
+        y = to_y > y_position ? y_position + delta_y : y_position - delta_y
         return true if game.is_occupied?(x, y)
       end
     end
 
-    if @slope == 1.0 && x_position > x_dest
-      (x_position - 1).downto(x_dest + 1) do |x|
+    if @slope == 1.0 && x_position > to_x
+      (x_position - 1).downto(to_x + 1) do |x|
         delta_y = x_position - x
-        y = y_dest > y_position ? y_position + delta_y : y_position - delta_y
+        y = to_y > y_position ? y_position + delta_y : y_position - delta_y
         return true if game.is_occupied?(x, y)
       end
     end
     false 
   end
-    # if y_position == y_dest || x_position == x_dest
+    # if y_position == to_y || x_position == to_x
     #   fail 'not a move'
     # end
 

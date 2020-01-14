@@ -4,8 +4,7 @@
     <% 8.times do |y_position| %>
         <% 8.times do |x_position| %>
             <div class='square <%= (y_position + x_position).even? ? "white" : "black" %>'  data-x-position=<%= x_position %> 
-              data-y-position=<%= y_position %>
-            >
+              data-y-position=<%= y_position %>>
               <% piece = @game.piece_at(x_position, y_position) %>
 
               
