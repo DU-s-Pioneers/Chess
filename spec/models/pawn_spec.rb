@@ -16,7 +16,7 @@ RSpec.describe Pawn, type: :model do
       expect(pawn.valid_move?(3, 3)).to eq true
     end
     it "should not be able to make a jump move if has moved" do
-      pawn = Pawn.create(game_id: game.id, x_position: 3, y_position: 2, moved: true, white?: false)
+      pawn = Pawn.create(game_id: game.id, x_position: 3, y_position: 2, moved: true, white?: true)
       expect(pawn.valid_move?(3, 4)).to eq false
     end
 

@@ -8,7 +8,8 @@ class Piece < ApplicationRecord
   def valid_move?(to_x, to_y)
     my_valid_move?(to_x, to_y) &&
       on_board?(to_x, to_y) &&
-      game.piece_at(to_x, to_y)&.white? != white?
+      game.piece_at(to_x, to_y)&.white? != white? &&
+      !is_obstructed?(to_x, to_y)
   end
 
   def on_board?(x = x_position, y = y_position)
