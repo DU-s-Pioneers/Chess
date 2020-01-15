@@ -30,7 +30,7 @@ class PiecesController < ApplicationController
 
 		if @piece.player_id != current_user.id 
 			errors << "Invalid move. It's NOT your piece. Try another piece"
-		elsif @piece.color == "black" && @piece.game.turn.even? || @piece.color == "white" && @piece.game.turn.odd? 
+		elsif @piece.white? == false && @piece.game.turn.even? || @piece.white? == true && @piece.game.turn.odd? 
 			#even=black && odd=white
 			errors << "It's NOT your turn Please wait." 
 		elsif @piece.move?(to_x, to_y) #trakcing turns
@@ -67,7 +67,7 @@ class PiecesController < ApplicationController
 private
 
 	def piece_params
-		params.require(:piece). permit(:game_id, :player_id, :piece_type, :color, :x_position, :y_position)
+		params.require(:piece). permit(:game_id, :player_id, :piece_type, :white?, :x_position, :y_position)
 	end
 
 end

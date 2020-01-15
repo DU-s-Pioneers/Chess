@@ -44,7 +44,7 @@ class Pawn < Piece
 
 
 	def direction
-		color? ? -1 : 1
+		white?? 1 : -1
 	end			
 
 

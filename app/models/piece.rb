@@ -2,13 +2,13 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def can_be_taken?
-    game.pieces_for_color(!color).any? { |piece| piece.valid_move?(x_position, y_position) }
+    game.pieces_for_color(!white?).any? { |piece| piece.valid_move?(x_position, y_position) }
   end
 
   def valid_move?(to_x, to_y)
     my_valid_move?(to_x, to_y) &&
       on_board?(to_x, to_y) &&
-      game.piece_at(to_x, to_y)&.color != color
+      game.piece_at(to_x, to_y)&.white? != white?
   end
 
   def on_board?(x = x_position, y = y_position)
