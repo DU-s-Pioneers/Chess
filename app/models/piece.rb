@@ -12,6 +12,10 @@ class Piece < ApplicationRecord
       !is_obstructed?(to_x, to_y)
   end
 
+  def invalid_move?(to_x, to_y)
+    !valid_move?(to_x, to_y)
+  end
+
   def on_board?(x = x_position, y = y_position)
     x && y &&
       x >= 0 &&
@@ -83,13 +87,13 @@ class Piece < ApplicationRecord
 
   def move_to!(to_x, to_y)
     game.piece_at(to_x, to_y)&.capture!
-    update_atributes(x_position: to_x, y_position: to_y, moved: true)
-    game.update_atributes(en_passant_pawn: nil)
+    update_attributes(x_position: to_x, y_position: to_y, moved: true)
+    game.update_attributes(en_passant_pawn: nil)
     game.pieces.reload
   end
 
   def capture!
-    update_atributes(x_position: nil, y_position: nil)
+    update_attributes(x_position: nil, y_position: nil)
   end  
 
   def enemy_piece_at?(to_x, to_y)

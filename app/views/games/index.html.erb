@@ -11,5 +11,16 @@
       </li>
     <% end %>
   </ul>
+  <h1>All Games</h1>
+  <ul>
+    <% @games.each do |game| %>
+      <li>
+        <div class="game">
+          <h1><%= game.name %>-
+            <%= link_to("View Game", game) %></h1>
+        </div>
+      </li>
+    <% end %>
+  </ul>  
 </section>
 

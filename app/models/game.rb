@@ -98,4 +98,13 @@ class Game < ApplicationRecord
 	def stalemate?
     pieces_for(turn_color).all? { |p| p.valid_moves.empty? }
   end
+
+	def turn_over
+		if turn == 1 #1 == white && 2 == black
+			turn = 2 #if it is 1's turn, change to 2
+		else
+			turn = 1
+		end
+		save
+	end
 end

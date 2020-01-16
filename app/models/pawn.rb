@@ -43,7 +43,7 @@ class Pawn < Piece
 
 
 	def direction
-		white?? 1 : -1
+		white?? -1 : 1
 	end			
 
 

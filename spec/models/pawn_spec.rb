@@ -37,8 +37,8 @@ RSpec.describe Pawn, type: :model do
 
   describe "En_passant" do
     it "should allow en_passant capture" do
-      pawn = Pawn.create(game_id: game.id, x_position: 7, y_position: 1, white?: false)
-      pawn = Pawn.create(game_id: game.id, x_position: 6, y_position: 3, white?: true)
+      pawn = Pawn.create(game_id: game.id, x_position: 7, y_position: 1, white?: true)
+      pawn = Pawn.create(game_id: game.id, x_position: 6, y_position: 3, white?: false)
 
     end
   end
