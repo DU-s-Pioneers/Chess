@@ -48,7 +48,7 @@ RSpec.describe Game, type: :model do
         x_position: 4,
         y_position: 4,
         type: 'King',
-        color: true
+        white?: true
         )
 
       game.pieces << FactoryBot.create(
@@ -56,7 +56,7 @@ RSpec.describe Game, type: :model do
         x_position: 6,
         y_position: 4,
         type: 'Rook',
-        color: false
+        white?: false
         )
       expect(game.check?).to be true
 

@@ -2,8 +2,7 @@ class Pawn < Piece
 	def my_valid_move?(to_x, to_y) 
 		(valid_step_move?(to_x, to_y) ||
 			valid_jump_move?(to_x, to_y) ||
-			valid_capture_move?(to_x, to_y)) &&
-			!is_obstructed?(to_x, to_y)
+			valid_capture_move?(to_x, to_y))
 	end
 
 	def valid_step_move?(to_x, to_y)
@@ -44,7 +43,7 @@ class Pawn < Piece
 
 
 	def direction
-		color? ? -1 : 1
+		white?? -1 : 1
 	end			
 
 

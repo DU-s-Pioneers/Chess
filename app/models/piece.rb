@@ -2,13 +2,18 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def can_be_taken?
-    game.pieces_for_color(!color).any? { |piece| piece.valid_move?(x_position, y_position) }
+    game.pieces_for_color(!white?).any? { |piece| piece.valid_move?(x_position, y_position) }
   end
 
   def valid_move?(to_x, to_y)
     my_valid_move?(to_x, to_y) &&
       on_board?(to_x, to_y) &&
-      game.piece_at(to_x, to_y)&.color != color
+      game.piece_at(to_x, to_y)&.white? != white? &&
+      !is_obstructed?(to_x, to_y)
+  end
+
+  def invalid_move?(to_x, to_y)
+    !valid_move?(to_x, to_y)
   end
 
   def on_board?(x = x_position, y = y_position)
@@ -82,13 +87,13 @@ class Piece < ApplicationRecord
 
   def move_to!(to_x, to_y)
     game.piece_at(to_x, to_y)&.capture!
-    update_atributes(x_position: to_x, y_position: to_y, moved: true)
-    game.update_atributes(en_passant_pawn: nil)
+    update_attributes(x_position: to_x, y_position: to_y, moved: true)
+    game.update_attributes(en_passant_pawn: nil)
     game.pieces.reload
   end
 
   def capture!
-    update_atributes(x_position: nil, y_position: nil)
+    update_attributes(x_position: nil, y_position: nil)
   end  
 
   def enemy_piece_at?(to_x, to_y)

@@ -30,11 +30,6 @@ class Game < ApplicationRecord
 		kings.any?(&:can_be_taken?)
 	end
 
-	def pieces_for_color(color)
-		pieces.where(color: color)
-	end
-
-
 	def set_pieces_user(color, user_id)
   end
 
@@ -50,35 +45,40 @@ class Game < ApplicationRecord
 			)
 	end
 
+	def pieces_for_color(color)
+		pieces.where(white?: true || false)
+	end
+
+
 	def create_white_pieces
 		8.times do |i|
-			create_piece(Pawn, i, 1, white_player_id, true)
+			create_piece(Pawn, i, 6, white_player_id, true)
 		end
 
-		create_piece(Rook,   0, 0, white_player_id, true)
-		create_piece(Knight, 1, 0, white_player_id, true)
-		create_piece(Bishop, 2, 0, white_player_id, true)
-		create_piece(Queen,  3, 0, white_player_id, true)
-		create_piece(King,   4, 0, white_player_id, true)
-		create_piece(Bishop, 5, 0, white_player_id, true)
-		create_piece(Knight, 6, 0, white_player_id, true)
-		create_piece(Rook,   7, 0, white_player_id, true)
+		create_piece(Rook,   0, 7, white_player_id, true)
+		create_piece(Knight, 1, 7, white_player_id, true)
+		create_piece(Bishop, 2, 7, white_player_id, true)
+		create_piece(Queen,  3, 7, white_player_id, true)
+		create_piece(King,   4, 7, white_player_id, true)
+		create_piece(Bishop, 5, 7, white_player_id, true)
+		create_piece(Knight, 6, 7, white_player_id, true)
+		create_piece(Rook,   7, 7, white_player_id, true)
 
 	end
 
 	def create_black_pieces
 		8.times do |i|
-			create_piece(Pawn, i, 6, black_player_id, false)
+			create_piece(Pawn, i, 1, black_player_id, false)
 		end
 
-		create_piece(Rook,   0, 7, black_player_id, false)
-		create_piece(Knight, 1, 7, black_player_id, false)
-		create_piece(Bishop, 2, 7, black_player_id, false)
-		create_piece(Queen,  3, 7, black_player_id, false)
-		create_piece(King,   4, 7, black_player_id, false)
-		create_piece(Bishop, 5, 7, black_player_id, false)
-		create_piece(Knight, 6, 7, black_player_id, false)
-		create_piece(Rook,   7, 7, black_player_id, false)
+		create_piece(Rook,   0, 0, black_player_id, false)
+		create_piece(Knight, 1, 0, black_player_id, false)
+		create_piece(Bishop, 2, 0, black_player_id, false)
+		create_piece(Queen,  3, 0, black_player_id, false)
+		create_piece(King,   4, 0, black_player_id, false)
+		create_piece(Bishop, 5, 0, black_player_id, false)
+		create_piece(Knight, 6, 0, black_player_id, false)
+		create_piece(Rook,   7, 0, black_player_id, false)
 
 	end
 
@@ -87,7 +87,7 @@ class Game < ApplicationRecord
   end
 
 	def pieces_for(color)
-    pieces.filter { |p| p.color == color && p.on_board? }
+    pieces.filter { |p| p.white? == white? && p.on_board? }
   end
 
 	def turn_color
@@ -98,4 +98,13 @@ class Game < ApplicationRecord
 	def stalemate?
     pieces_for(turn_color).all? { |p| p.valid_moves.empty? }
   end
+
+	def turn_over
+		if turn == 1 #1 == white && 2 == black
+			turn = 2 #if it is 1's turn, change to 2
+		else
+			turn = 1
+		end
+		save
+	end
 end

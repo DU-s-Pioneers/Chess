@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  helper_method :current_game
+
   def index
     @games = Game.all
   end
@@ -8,8 +10,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    game = Game.create(game_params)
-    game.update_attributes(white_player_id: current_user.id) 
+    game = Game.create(game_params.merge(white_player_id: current_user.id)) 
     redirect_to root_path
   end
 
@@ -17,11 +18,16 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
+  def update
+    #redirect_to game_path(current_game)
+    head :no_content
+  end
+
   def join
     game = Game.find(params[:id])
     return unless game.black_player_id.nil?
     game.update_attributes(black_player_id: current_user.id)
-    redirect_to game
+    redirect_to game_path(game)
   end
 
   def destroy
@@ -32,6 +38,11 @@ class GamesController < ApplicationController
   end
 
   private
+
+  helper_method :current_game
+  def current_game
+    @current_game ||= Game.find(params[:id])
+  end
 
   def game_params
     params.require(:game).permit(:name)
