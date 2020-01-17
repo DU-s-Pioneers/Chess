@@ -36,7 +36,7 @@ class PiecesController < ApplicationController
 			@piece.game.turn_over
 		end
 			puts errors
-			redirect_to game_path(@piece.game)
+			render "reload"
 	end
 
 	def castle_queen
