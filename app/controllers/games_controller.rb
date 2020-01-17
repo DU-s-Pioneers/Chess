@@ -19,8 +19,9 @@ class GamesController < ApplicationController
   end
 
   def update
-    #redirect_to game_path(current_game)
-    head :no_content
+    @game = Game.find(params[:id])
+    render "show"
+    #head :no_content
   end
 
   def join
