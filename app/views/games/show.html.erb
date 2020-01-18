@@ -31,12 +31,20 @@
 
       var pieceUpdateUrl = '/pieces/' + pieceId + '?x_position=' + x_position + '&y_position=' + y_position
 
-      console.log(pieceUpdateUrl)
-
       $.ajax({
         type: 'PUT', 
-        url: pieceUpdateUrl
+        url: pieceUpdateUrl,
+        contentType: "application/json",
+        dataType: 'json',
+      }).success(function(data){
+        if (data.errors) {
+          alert("Invalid move");
+          window.location.reload();
+        }
+        console.log(data)
       })
+
+
     }
   })
 </script>
