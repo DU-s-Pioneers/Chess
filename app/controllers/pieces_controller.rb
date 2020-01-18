@@ -25,18 +25,26 @@ class PiecesController < ApplicationController
 		to_y = params[:y_position].to_i
 
 		errors = []
+
 		if @piece.player_id != current_user.id 
 			errors << "Invalid move. It's NOT your piece. Try another piece"
+      payload = {errors: errors}
 		#elsif @piece.white? == true && @piece.game.turn.even? || @piece.white? == false && @piece.game.turn.odd? 
 			#even=black && odd=white
 			#errors << "It's NOT your turn Please wait." 
 		elsif @piece.invalid_move?(to_x, to_y) 
 			errors << "Move is invalid. Try again."
-		else @piece.move_to!(to_x, to_y) #trakcing turns			
+      payload = {errors: errors}
+		else @piece.move_to!(to_x, to_y) 	
 			@piece.game.turn_over
+      payload = {status: 'Successful move.'}
 		end
-			puts errors
-			redirect_to game_path(@piece.game)
+
+	  respond_to do |format|
+      format.json do
+        render json: payload
+      end
+    end
 	end
 
 	def castle_queen
